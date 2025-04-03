@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --job-name=genomeIndexing
+#SBATCH --account=project_2003924
+#SBATCH --ntasks=1
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64g
+#SBATCH --time=04:00:00
+#SBATCH --partition=small
+
+module load biokit
+#GENOMEDIR="/scratch/project_2003924/bulkData_20250327/dataFiles/genome/human"
+#gzip -d ./gencode.v29.annotation.gtf.gz
+mkdir -p STAR
+STAR --runThreadN 32 --runMode genomeGenerate --genomeDir ./STAR --genomeFastaFiles GRCh38.primary_assembly.genome.fa --sjdbGTFfile gencode.v29.annotation.gtf
